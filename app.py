@@ -88,6 +88,27 @@ with gr.Blocks() as demo:
     
 if args.ngrok is not None:
     connect(args.ngrok, args.server_port, {'region': args.ngrok_region, 'authtoken_from_env': False})
+
+import urllib.request
+
+def baixar_arquivo_se_nao_existir():
+    nome_arquivo = "inswapper_128.onnx"
+    url = "https://github.com/facefusion/facefusion-assets/releases/download/models/inswapper_128_fp16.onnx"
+
+    # Verifica se o arquivo já existe na pasta principal do projeto
+    if os.path.exists(nome_arquivo):
+        print(f"O arquivo '{nome_arquivo}' já existe.")
+    else:
+        # Se não existir, baixa o arquivo
+        print(f"Baixando o arquivo '{nome_arquivo}'...")
+        try:
+            urllib.request.urlretrieve(url, nome_arquivo)
+            print(f"Download concluído: '{nome_arquivo}' foi baixado com sucesso.")
+        except Exception as e:
+            print(f"Erro durante o download: {e}")
+
+# Chama a função para verificar e baixar o arquivo, se necessário
+baixar_arquivo_se_nao_existir()
     
 #demo.launch(share=True,server_name="0.0.0.0", show_error=True)
 demo.launch(show_error=True,share=False)
