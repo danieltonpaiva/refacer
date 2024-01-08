@@ -156,8 +156,6 @@ class Refacer:
         print('Video enviado para o Telegram.')
         video_clip.close()
         os.remove(new_path)
-        print("Esperamos alguns minutos...")
-        time.sleep(300000)
         return output_path
 
     def __get_faces(self,frame,max_num=0):
