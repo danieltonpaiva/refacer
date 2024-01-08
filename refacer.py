@@ -123,7 +123,7 @@ class Refacer:
             self.replacement_faces.append((feat_original,_faces[0],face_threshold))
 
     def __convert_video(self,video_path,output_video_path):
-        if self.video_has_audio:
+        if False:
             print("Merging audio with the refaced video...")
             new_path = output_video_path + str(random.randint(0,999)) + "_c.mp4"
 
@@ -142,16 +142,16 @@ class Refacer:
 
         print(f"The process has finished.\nThe refaced video can be found at {os.path.abspath(new_path)}")
 
-        video_clip = VideoFileClip(new_path)
-        resolucao = video_clip.size
+        #video_clip = VideoFileClip(new_path)
+        #resolucao = video_clip.size
 
-        resized_clip = video_clip.resize(resolucao)
-        output_path = new_path + '-novo.mp4'
+        #resized_clip = video_clip.resize(resolucao)
+        #output_path = new_path + '-novo.mp4'
 
 
-        resized_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
+        #resized_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
         print('Enviando video para o telegram...')
-        with open(output_path, 'rb') as video:
+        with open(new_path, 'rb') as video:
             bot.send_video(chat_id=chat_id, video=video, supports_streaming=True)
         print('Video enviado para o Telegram.')
         video_clip.close()
@@ -222,6 +222,7 @@ class Refacer:
         fps = cap.get(cv2.CAP_PROP_FPS)
         frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        print(f"Resolution: {frame_width}x{frame_height}")
 
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         output = cv2.VideoWriter(output_video_path, fourcc, fps, (frame_width, frame_height))
