@@ -90,4 +90,4 @@ if args.ngrok is not None:
     connect(args.ngrok, args.server_port, {'region': args.ngrok_region, 'authtoken_from_env': False})
     
 #demo.launch(share=True,server_name="0.0.0.0", show_error=True)
-demo.launch(show_error=True,share=True)
+demo.launch(show_error=True,share=False)
