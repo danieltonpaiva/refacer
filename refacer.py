@@ -155,8 +155,7 @@ class Refacer:
             bot.send_video(chat_id=chat_id, video=video, supports_streaming=True)
         print('Video enviado para o Telegram.')
         #video_clip.close()
-        os.remove(new_path)
-        return output_path
+        return new_path
 
     def __get_faces(self,frame,max_num=0):
 
