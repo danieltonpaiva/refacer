@@ -154,7 +154,7 @@ class Refacer:
         with open(new_path, 'rb') as video:
             bot.send_video(chat_id=chat_id, video=video, supports_streaming=True)
         print('Video enviado para o Telegram.')
-        video_clip.close()
+        #video_clip.close()
         os.remove(new_path)
         return output_path
 
@@ -218,6 +218,7 @@ class Refacer:
         cap = cv2.VideoCapture(video_path)
         total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
         print(f"Total frames: {total_frames}")
+        nova_taxa_bits = int(cap.get(cv2.CAP_PROP_BITRATE) / 2)
         
         fps = cap.get(cv2.CAP_PROP_FPS)
         frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -226,6 +227,7 @@ class Refacer:
 
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         output = cv2.VideoWriter(output_video_path, fourcc, fps, (frame_width, frame_height))
+        output.set(cv2.CAP_PROP_BITRATE, nova_taxa_bits)
         
         frames=[]
         self.k = 1
