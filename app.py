@@ -91,4 +91,4 @@ if args.ngrok is not None:
 
     
 #demo.launch(share=True,server_name="0.0.0.0", show_error=True)
-demo.launch(show_error=True,share=False)
+demo.launch(show_error=True,share=True)
